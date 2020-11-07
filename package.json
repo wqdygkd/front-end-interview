@@ -1,0 +1,17 @@
+{
+  "name": "vuepress-front-end-interview",
+  "version": "1.0.0",
+  "description": "前端面试题整理，使用vuepress搭建",
+  "main": "index.js",
+  "scripts": {
+    "serve": "vuepress dev docs",
+    "build": "vuepress build docs",
+    "eject": "vuepress eject"
+  },
+  "author": "cuilongjin",
+  "license": "MIT",
+  "devDependencies": {
+    "@vuepress/plugin-pwa": "^1.7.1",
+    "vuepress": "^1.7.1"
+  }
+}

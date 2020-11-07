@@ -1,0 +1,16 @@
+{
+  "name": "稻草人",
+  "short_name": "稻草人",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "description": "稻草人",
+  "theme_color": "blue",
+  "icons": [
+    {
+      "src": "./egg.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ]
+}
