@@ -1,4 +1,4 @@
-# vue 与 vuex
+> vue 与 vuex
 
 ## vue 优缺点
 
