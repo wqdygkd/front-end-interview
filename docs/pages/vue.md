@@ -431,6 +431,41 @@ methods: {
 }
 ```
 
+## Hash 和 History 路由的区别和优缺点？
+
+- hash 路由模式的实现主要是基于下面几个特性：
+
+URL 中 hash 值只是客户端的一种状态，也就是说当向服务器端发出请求时，hash 部分不会被发送（hash 值改变，浏览器不会重新发起请求）
+hash 值改变，会在浏览器的访问历史中增加一个记录。因此我们能通过浏览器的回退、前进按钮控制 hash 的切换
+可以通过 a 标签，或对 loaction.hash 进行赋值，来改变 URL 的 hash 值
+可以使用 hashchange 事件来监听 hash 值的变化，从而对页面进行跳转（渲染）
+
+- history 路由模式的实现主要基于存在下面几个特性：
+
+pushState 和 repalceState 两个 API 来操作实现 URL 的变化，且不会重新发起请求
+使用 popstate  事件来监听 url 的变化，从而对页面进行跳转（渲染）
+history.pushState() 或 history.replaceState() 不会触发 popstate 事件，这时我们需要手动触发页面跳转（渲染）。
+
+- hash模式优缺点
+
+优点
+
+只需要前端配置路由表, 不需要后端的参与
+兼容性好, 浏览器都能支持
+hash值改变不会向后端发送请求, 完全属于前端路由
+
+缺点
+hash值前面需要加`#`, 不符合url规范, 也不美观
+
+- history 模式的优缺点：
+
+优点：
+符合url地址规范, 不需要`#`, 使用起来比较美观
+
+缺点：
+需要服务端配合重定向，否则一刷新页面就404了
+兼容性比较差, 利用了 HTML5 History对象中新增的 pushState() 和 replaceState() 方法, 需要浏览器的支持
+
 https://cn.vuejs.org/v2/guide/components-custom-events.html#将原生事件绑定到组件
 
 `.native` 修饰符 监听根元素的原生事件
