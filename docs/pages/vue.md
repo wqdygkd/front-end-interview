@@ -1,19 +1,17 @@
 > vue 与 vuex
 
-## vue 优缺点
+组件化  组件渲染更新过程 组件通讯
+
+vdom diff
+模板编译
+模板渲染过程
+路由
+
+## vue 优缺点，与 react 区别
 
 使用的是 MVVM 模式 渐进式 js 框架 数据双向绑定思想 数据驱动视图 轻量 简洁
 
-## 对 vue 不同构建版本的解释
-
-- **完整版**：同时包含编译器和运行时的版本。
-- **编译器**：用来将模板字符串编译成为 js 渲染函数的代码
-- **运行时**：用来创建 Vue 实例、渲染并处理虚拟 DOM 等的代码。基本上就是除去编译器的其它一切。
-- **UMD**：UMD 版本可以通过 `<script>` 标签直接用在浏览器中
-- **CommonJS**：CommonJS 版本用来配合老的打包工具
-- **ES Module**：从 2.6 开始 Vue 会提供两个 ES Modules (ESM) 构建文件
-
-## vue 的生命周期有哪些，作用是什么？ 分别什么阶段执行。在每个周期你会写哪些东西。
+## vue 的生命周期有哪些，作用是什么？分别什么阶段执行。在每个周期你会写哪些东西
 
 beforeCreate、created、beforeMount、mounted、beforeUpdate、updated、beforeDestroy、destroyed
 
@@ -42,7 +40,7 @@ beforeCreate、created、beforeMount、mounted、beforeUpdate、updated、before
 
 > 为什么在 `$nexttick` 中可以获取到 dom
 
-## vue 怎么实现双向数据绑定
+## vue 怎么实现双向数据绑定，v-model 原理
 
 vue 数据双向绑定是通过数据劫持结合发布者-订阅者模式的方式来实现的。其实主要是用了 Es5 中的 `Object.defineProperty` 来劫持每个属性的 getter 和 setter。这也正是 Vue 不兼容 IE8 以下的原因。
 
@@ -146,7 +144,7 @@ routes: [{ path: '/user/:id?', name='user', component: User }]
 
 ## 首屏加载优化和算法
 
-## vue 中 `$set`
+## $set 原理
 
 如果在实例创建之后添加新的属性到实例上，它不会触发视图更新
 
@@ -430,6 +428,7 @@ methods: {
   }
 }
 ```
+
 
 ## Hash 和 History 路由的区别和优缺点？
 
