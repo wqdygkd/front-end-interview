@@ -13,8 +13,6 @@ module.exports = {
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }]
   ],
   locales: {
-    // 键名是该语言所属的子路径
-    // 作为特例，默认语言可以使用 '/' 作为其路径。
     '/': {
       lang: 'zh-CN', // 将会被设置为 <html> 的 lang 属性
     }
@@ -38,43 +36,13 @@ module.exports = {
     //顶部导航栏
     nav: [
       { text: '首页', link: '/' },
-      // {
-      //     text: '分类',
-      //     ariaLabel: '分类',
-      //     items: [
-      //         { text: '文章', link: '/pages/folder1/test1.md' },
-      //         { text: '琐碎', link: '/pages/folder2/test4.md' },
-      //     ]
-      // },
-      // { text: '功能演示', link: '/pages/folder1/test3.md' },
       { text: 'Github', link: 'https://github.com/cuilongjin' }
     ],
-    // 侧边导航栏：会根据当前的文件路径是否匹配侧边栏数据，自动显示/隐藏
+    // 侧边导航栏
     sidebar: {
-      // '/pages/': [
-      //   {
-      //     title: 'xx', // 必要的 一级菜单名称
-      //     collapsable: true, // 可选的, 默认值是 true,  false为默认展开菜单, 默认值true是折叠,
-      //     sidebarDepth: 1, // 可选的, 默认值是 1 ,设置侧边导航自动提取markdown文件标题的层级，默认1为h2层级
-      //     children: [
-      //       ['前端面试资源汇总.md', '前端面试资源汇总'],
-      //       ['h5c3.md', 'h5c3'], // 菜单名称为'子菜单1'，跳转至/pages/folder1/test1.md
-      //       ['js.md', 'js'],
-      //       ['es6.md', 'es6'],
-      //       ['jquery.md', 'jquery'],
-      //       ['vue.md', 'vue'],
-      //       ['性能优化.md', '性能优化'],
-      //       ['兼容性问题.md', '兼容性问题'],
-      //       ['浏览器-网络-缓存.md', '浏览器-网络-缓存'],
-      //       ['手写题.md', '手写题'],
-      //       ['开放问题.md', '开放问题']
-      //     ]
-      //   }
-      // ],
-
       '/pages/': [
         ['前端面试资源汇总.md', '前端面试资源汇总'],
-        ['h5c3.md', 'h5c3'], // 菜单名称为'子菜单1'，跳转至/pages/folder1/test1.md
+        ['h5c3.md', 'h5c3'],
         ['js.md', 'js'],
         ['es6.md', 'es6'],
         ['jquery.md', 'jquery'],
@@ -87,16 +55,10 @@ module.exports = {
       ]
     },
 
-    // 搜索设置
     search: true,
     searchMaxSuggestions: 10,
-    // 作者
-    author: 'cuilongjin',
-    // 作者头像
+    author: 'c',
     authorAvatar: '/avatar.png',
-    // 备案号
-    record: 'xxxx',
-    // 项目开始时间
     startYear: '2017'
   }
 }

@@ -1,7 +1,6 @@
 # 说明
 
-该分支只包含面试题 md 文件，作为子模块
+牛客网-前端工程师精选面经合集
+https://www.nowcoder.com/discuss/experience?tagId=644
 
-**备注：**
-
-答案不够正确和全面，欢迎指正
+leetcode 算法 https://leetcode-cn.com/problemset/all/
