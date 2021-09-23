@@ -18,31 +18,33 @@
  * @return {ListNode}
  */
 var addTwoNumbers = function(l1, l2) {
-    let i = 0
-    let j = 0
-    let arr = []
-    while(true) {
-        let l1i = l1[i]
-        let l2i = l2[i]
-        if (l1i === undefined && l1i === undefined) {
-            if (j) {
-                arr[i + 1] = 1
-            }
-            break
-        }
-        l1i = l1i || 0
-        l2i = l2i || 0
-        let sum = l1i + l2i + j
-        j = 0
-        if (sum < 10) {
-            arr[i] = sum
+    let head = null, tail = null
+    let carry = 0
+
+    while(l1 || l2) {
+        let n1 = l1 ? l1.val : 0
+        let n2 = l2 ? l2.val : 0
+        const sum = n1 + n2 + carry;
+
+        if (!head) {
+            head = tail = new ListNode(sum % 10)
         } else {
-            arr[i] = sum % 10
-            j = 1
+            tail.next = new ListNode(sum % 10);
+            tail = tail.next;
         }
-        i += 1
+        carry = Math.floor(sum / 10);
+
+        if (l1) {
+            l1 = l1.next;
+        }
+        if (l2) {
+            l2 = l2.next;
+        }
     }
-    return arr
+    if (carry > 0) {
+        tail.next = new ListNode(carry);
+    }
+    return tail;
 };
 
 // @lc code=end
