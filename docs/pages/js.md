@@ -65,52 +65,6 @@ var arr = [...arguments]
 push、pop。shift、unshift、concat、every、filter、indexOf、includes、join、map、reduce、forEach
 
 
-## 数组去重
-
-1. 遍历数组：思路：新建一个数组，遍历去要重的数组，当值不在新数组的时候（indexOf 为-1）就加入该新数组中
-
-```js
-function unique(arr) {
-  var newArr = []
-  for (var i = 0; i < arr.length; i++) {
-    if (newArr.indexOf(arr[i]) === -1) {
-      newArr.push(arr[i])
-    }
-  }
-  return newArr
-}
-console.log(unique(arr))
-```
-
-2. 数组下标判断法：思路：如果当前数组的第 i 项在当前数组中第一次出现的位置不是 i，那么表示第 i 项是重复的，忽略掉。否则存入结果数组
-
-```js
-function unique(arr) {
-  var newArr = []
-  for (var i = 0; i < arr.length; i++) {
-    if (arr.indexOf(arr[i]) === i) {
-      newArr.push(arr[i])
-    }
-  }
-  return newArr
-}
-```
-
-3. ES6 实现
-
-   基本思路：ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。
-
-   Set 函数可以接受一个数组（或类似数组的对象）作为参数，用来初始化
-
-```js
-function unique(arr) {
-  var x = new Set(arr)
-  return [...x]
-}
-console.log(unique(arr))
-```
-
-
 ## 快速复制一个数组，得到一个新数组
 
 ```js
@@ -367,22 +321,6 @@ Object.prototype 上的方法
 * toLocaleString
 * valueOf
 
-## 解析 url 参数
-
-```js
-function parseQueryString(url) {
-  let temp = {}
-  url
-    .split('?')[1]
-    .split('&')
-    .forEach((item) => {
-      s = item.split('=')
-      temp[s[0]] = s[1]
-    })
-  return temp
-}
-```
-
 ## ajax 原理
 
 ajax 的原理简单来说通过 XmlHttpRequest 对象来向服务器发异步请求，从服务器获得数据，然后用 js 来操作 DOM 而更新页面
@@ -407,22 +345,6 @@ xhr.onreadystatechange = function () {
     }
   }
 }
-```
-
-## Ajax 轮询
-
-Ajax 轮询——"定时的通过 Ajax 查询服务端"。
-
-概念：轮询（polling）：客户端按规定时间定时像服务端发送 ajax 请求，服务器接到请求后马上返回响应信息并关闭连接
-
-ajax 同步请求
-
-```js
-xhr.open('type', 'url', 'async')
-xhr.open('get', 'url', 'false') // true 异步 为 false 为同步 默认true
-
-// jq 中添加配置
-async： false // 默认 true 异步 false 同步
 ```
 
 ## 如何使用原生 js 给一个按钮绑定两个 onclick 事件
