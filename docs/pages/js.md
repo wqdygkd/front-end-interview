@@ -28,10 +28,6 @@ function f(x){return x + 1}
 
 ```
 
-## 面向对象
-
-特点：封装性，继承性
-
 ## js 中的数据类型
 
 ## 伪数组和数组
@@ -42,101 +38,6 @@ function f(x){return x + 1}
 - 常见的伪数组：`arguments`、`document.getElementsByTagName的返回值`、`jQuery对象`
 
 ## 将伪数组转换成真数组
-
-```js
-var obj = {
-  0: 'zs',
-  1: 'ls',
-  length: 2,
-}
-// 借用数组的方法
-var arr = Array.prototype.slice.call(obj)
-var arr = [].slice.call(obj)
-
-// 使用es6中数组的from方法：从一个类似数组或可迭代对象中创建一个新的数组实例
-var arr = Array.from(obj)
-
-// 对于函数的arguments参数可以使用扩展运算符
-var arr = [...arguments]
-```
-
-## 用过哪些数组的方法，forEach 和 map 的区别
-
-push、pop。shift、unshift、concat、every、filter、indexOf、includes、join、map、reduce、forEach
-
-
-## 快速复制一个数组，得到一个新数组
-
-```js
-var arr2 = arr1.slice()
-```
-
-## 深浅拷贝，实现深拷贝
-
-**浅拷贝**：可以使用 `Object.assign` 或展开运算符 `...` 来实现浅拷贝
-
-**深拷贝**：
-
-* 通过 JSON 字符串
-
-```js
-function jsonDeepCopy(original) {
-  return JSON.parse(JSON.stringify(original))
-}
-```
-
-**这种方法只能复制 JSON 格式支持的属性名和值，不支持的属性名和值会直接忽略：会忽略 undefined、symbol，不能序列化函数，不能解决循环引用的对象**
-
-```js
-jsonDeepCopy({
-  [Symbol('a')]: 'abc',
-  b: function() {},
-  c: undefined
-})
-// 返回空对象 {}
-```
-
-实现通用深拷贝
-
-```js
-function deepCopy(original) {
-  if (Array.isArray(original)) {
-    const copy = []
-    for (const [index, value] of original.entries()) {
-      copy[index] = deepCopy(value)
-    }
-    return copy
-  } else if (typeof original === 'object' && original !== null) {
-    const copy = {}
-    for (const [key, value] of Object.entries(original)) {
-      copy[key] = deepCopy(value)
-    }
-    return copy
-  } else {
-    // 基础类型无需拷贝
-    return original
-  }
-}
-```
-
-简化版
-
-```js
-function deepCopy(original) {
-  if (Array.isArray(original)) {
-    return original.map(elem => deepCopy(elem))
-  } else if (typeof original === 'object' && original !== null) {
-    return Object.fromEntries(Object.entries(original).map(([key, val]) => [key, deepCopy(val)]))
-  } else {
-    // 原始类型值无需拷贝
-    return original
-  }
-}
-```
-
-`Object.fromEntries()` 方法把键值对列表转换为一个对象，是 `Object.entries` 的反转
-
-https://github.com/NuoHui/fe-note/blob/master/docs/javascript/深拷贝与浅拷贝.md
 
 ## 简单说一下 js 中的作用域，作用域链
 
@@ -219,72 +120,6 @@ var abc = () => {
 abc() //abc
 console.log(abc.prototype) //undefined
 ```
-
-## js 实现继承的方式
-
-参考：https://www.cnblogs.com/humin/p/4556820.html
-
-原型链继承，将父类的实例作为子类的原型，无法实现多继承
-
-```js
-function Cat(){
-}
-Cat.prototype = new Animal();
-Cat.prototype.name = 'cat';
-```
-
-构造继承，使用父类的构造函数来增强子类实例，等于是复制父类的实例属性给子类（没用到原型）
-
-```js
-function Cat(name){
-  Animal.call(this);
-  this.name = name || 'Tom';
-}
-```
-
-组合继承，通过调用父类构造，继承父类的属性并保留传参的优点，然后通过将父类实例作为子类原型，实现函数复用
-
-```js
-function Cat(name){
-  Animal.call(this);
-  this.name = name || 'Tom';
-}
-Cat.prototype = new Animal();
-Cat.prototype.constructor = Cat;
-```
-
-调用了两次父类构造函数，生成了两份实例
-
-寄生组合继承
-通过寄生方式，砍掉父类的实例属性，这样，在调用两次父类的构造的时候，就不会初始化两次实例方法/属性，避免的组合继承的缺点
-
-es6 中的继承
-
-```js
-class Super {}
-class Sub extends Super {}
-
-const sub = new Sub()
-
-Sub.__proto__ === Super
-```
-
-子类可以直接通过 `__proto__` 寻址到父类
-
-```js
-function Super() {}
-function Sub() {}
-
-Sub.prototype = new Super()
-Sub.prototype.constructor = Sub
-
-var sub = new Sub()
-
-Sub.__proto__ === Function.prototype
-```
-而通过 ES5 的方式，`Sub.__proto__ === Function.prototype`
-
-es5继承 与 es6 继承的区别参考 https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/20
 
 ## new 关键字在执行时做四件事情
 
@@ -371,16 +206,6 @@ javascript是单线程的语言，同一个时间只能做一件事，这就意�
 主线程不断重复上面的第三步
 
 ## 如何让浏览器闲时时执行一些函数
-
-
-## 防抖和节流
-:star:
-
-防抖的作用是将多个连续的debounced调用合并为一次callback调用
-
-节流的作用是限制callback调用的频率（每waitTime调用一次）
-
-https://wqdy.top/398.html
 
 ## `Object.is()` 判断两个值是否相同 与 `===` 区别
 
