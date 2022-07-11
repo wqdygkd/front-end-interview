@@ -7,76 +7,6 @@ vdom diff
 模板渲染过程
 路由
 
-## vue 优缺点，与 react 区别
-
-使用的是 MVVM 模式 渐进式 js 框架 数据双向绑定思想 数据驱动视图 轻量 简洁
-
-## vue 的生命周期有哪些，作用是什么？分别什么阶段执行。在每个周期你会写哪些东西
-
-beforeCreate、created、beforeMount、mounted、beforeUpdate、updated、beforeDestroy、destroyed
-
-注意点：除了这8个之外，还有哪些生命周期
-
-## Vue中组件生命周期调用顺序说一下
-
-组件的调用顺序都是先父后子,渲染完成的顺序是先子后父。
-组件的销毁操作是先父后子，销毁完成的顺序是先子后父。
-
-加载渲染过程
-父beforeCreate->父created->父beforeMount->子beforeCreate->子created->子beforeMount- >子mounted->父mounted
-
-子组件更新过程
-父beforeUpdate->子beforeUpdate->子updated->父updated
-
-父组件更新过程
-父 beforeUpdate -> 父 updated
-
-销毁过程
-父beforeDestroy->子beforeDestroy->子destroyed->父destroyed
-
-## 如果想在 beforeMount 中获取 dom，有什么方法?
-
-`$nexttick`
-
-> 为什么在 `$nexttick` 中可以获取到 dom
-
-## vue 怎么实现双向数据绑定，v-model 原理
-
-vue 数据双向绑定是通过数据劫持结合发布者-订阅者模式的方式来实现的。其实主要是用了 Es5 中的 `Object.defineProperty` 来劫持每个属性的 getter 和 setter。这也正是 Vue 不兼容 IE8 以下的原因。
-
-v-model 原理（语法糖），更深入的理解
-
-`Object.defineProperty` 可以用来监听数组吗？
-vue 是如何实现对数组的监听?
-
-## 数组更新检测，vue 中对数组的监听是怎么处理的
-
-变异方法：Vue 包含一组观察数组的变异方法，所以它们也将会触发视图更新
-
-push()、pop()、shift()、unshift()、splice()、sort()、reverse()
-
-替换数组：`filter()`、`concat()`
-
-## 组件通信
-
-同级组件之间、父组件与更深层子组件之间的数据通信
-
-**子传父**
-
-父组件给子组件传递一个函数，由子组件调用这个函数，借助 vue 中的自定义事件
-
-**父传子**
-
-将要传递的数据，通过属性传递给子组件，子组件通过 `props` 配置项来指定要接收的数据
-
-**非父子之间**
-
-通过 `事件总线 (event bus 公交车) 机制` 来实现的，子组件用 `$emit()`来触发事件，父组件用 `$on()`来监昕子组件的事件。
-
-## 组件之间实现双向数据绑定
-
-.sync 修饰符
-
 ## Vue中 .sync 和 v-model 的区别
 
 ## 路由拦截
@@ -152,88 +82,13 @@ Vue 会在初始化实例时对属性执行 getter/setter 转化过程，所以�
 
 Vue 不允许在已经创建的实例上动态添加新的根级响应式属性，可以使用 `Vue.set(object, key, value)` 方法将响应属性添加到嵌套的对象上，或者创建一个包含原对象属性和新属性的对象替换掉原对象
 
-## `keep-alive`
-
-组件之间切换的时候，保持这些组件的状态，以避免反复重渲染导致的性能问题
-
-用一个 `<keep-alive>` 元素将其动态组件包裹起来
-
 ## vue-loader
 
 解析和转换 .vue 文件，提取出其中的逻辑代码 script、样式代码 style、以及 HTML 模版 template，再分别把它们交给对应的 Loader 去处理
 
-## vue 中 key 属性作用
-
-官方文档中说：
-
-> 当 Vue.js 用`v-for`正在更新已渲染过的元素列表时，它默认用“就地复用”策略。如果数据项的顺序被改变，Vue 将不会移动 DOM 元素来匹配数据项的顺序， 而是简单复用此处每个元素，并且确保它在特定索引下显示已被渲染过的每个元素。
-
-没有`key`属性，Vue 无法跟踪每个节点
-
-key的作用是尽可能的复用 DOM 元素
-
-## key 的作用，可以使用 index 吗，使用 index 会有什么问题
-
-## prop 类型
-
-给每个 prop 指定的值类型。这时，你可以以对象形式列出 prop，这些属性的名称和值分别是 prop 各自的名称和类型：
-
-```js
-props: {
-  title: String,
-  likes: Number,
-  isPublished: Boolean,
-  commentIds: Array,
-  author: Object
-}
-
-props: {
-    // 基础的类型检查 (`null` 和 `undefined` 会通过任何类型验证)
-    propA: Number,
-    // 多个可能的类型
-    propB: [String, Number],
-    // 必填的字符串
-    propC: {
-      type: String,
-      required: true
-    },
-    // 带有默认值的数字
-    propD: {
-      type: Number,
-      default: 100
-    },
-    // 带有默认值的对象
-    propE: {
-      type: Object,
-      // 对象或数组默认值必须从一个工厂函数获取
-      default: function () {
-        return { message: 'hello' }
-      }
-    },
-    // 自定义验证函数
-    propF: {
-      validator: function (value) {
-        // 这个值必须匹配下列字符串中的一个
-        return ['success', 'warning', 'danger'].indexOf(value) !== -1
-      }
-    }
-  }
-```
-
-## nextTick 实现原理是什么？
-
-在下次 DOM 更新循环结束之后执行延迟回调。nextTick主要使用了宏任务和微任务。根据执行环境分别尝试采用
-
-Promise
-MutationObserver
-setImmediate
-如果以上都不行则采用setTimeout
-
-定义了一个异步方法，多次调用nextTick会将方法存入队列中，通过这个异步方法清空当前队列。
-
 ## Computed和Watch
 
-Computed 有缓存
+Computed 有缓存: 基于它们的响应式依赖进行缓存，只有跟计算属性相关的数据发生了改变，计算属性才会重新计算
 Watch没有缓存性 deep: true 深度监听，这样便会对对象中的每一项进行监听。优化的话可以使用字符串形式监听
 
 ## 为什么要使用虚拟 DOM
