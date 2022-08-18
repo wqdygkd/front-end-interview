@@ -289,16 +289,16 @@ methods: {
 
 - hash 路由模式的实现主要是基于下面几个特性：
 
-URL 中 hash 值只是客户端的一种状态，也就是说当向服务器端发出请求时，hash 部分不会被发送（hash 值改变，浏览器不会重新发起请求）
-hash 值改变，会在浏览器的访问历史中增加一个记录。因此我们能通过浏览器的回退、前进按钮控制 hash 的切换
-可以通过 a 标签，或对 loaction.hash 进行赋值，来改变 URL 的 hash 值
+URL 中 hash 值只是客户端的一种状态，也就是说当向服务器端发出请求时，hash 部分不会被发送（hash 值改变，浏览器不会重新发起请求），hash 值改变，会在浏览器的访问历史中增加一个记录。因此我们能通过浏览器的回退、前进按钮控制 hash 的切换，也可以通过 a 标签，或对 loaction.hash 进行赋值来改变。
+
 可以使用 hashchange 事件来监听 hash 值的变化，从而对页面进行跳转（渲染）
 
 - history 路由模式的实现主要基于存在下面几个特性：
 
 pushState 和 repalceState 两个 API 来操作实现 URL 的变化，且不会重新发起请求
 使用 popstate  事件来监听 url 的变化，从而对页面进行跳转（渲染）
-history.pushState() 或 history.replaceState() 不会触发 popstate 事件，这时我们需要手动触发页面跳转（渲染）。
+history.pushState() 或 history.replaceState() 不会触发 popstate 事件，我么可以重写这两个方法
+go、back、forward 会触发 popstate 事件
 
 - hash模式优缺点
 
